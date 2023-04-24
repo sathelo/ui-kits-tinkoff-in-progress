@@ -1,11 +1,17 @@
 <template>
-  <button :class="className">{{ text }}</button>
+  <button v-if="icon" @click="getClick" :class="className">
+    <VIcon v-if="iconPos === 'Left'" name="" />
+    <p>{{ text }}</p>
+    <VIcon v-if="iconPos === 'Right'" name="" />
+  </button>
+  <button v-else @click="getClick" :class="className">{{ text }}</button>
 </template>
 
 <script setup>
-import { listBtn } from "@/data/listsClasses";
+import { listBtn, listIconPos } from "@/data/listsClasses";
+import VIcon from "@/components/VIcon";
 
-const props = defineProps({
+defineProps({
   className: {
     type: String,
     default: listBtn[0],
@@ -17,31 +23,51 @@ const props = defineProps({
     type: String,
     default: "button",
   },
+  icon: {
+    type: String,
+    validator: function (v) {
+      return listIcon.includes(v);
+    },
+  },
+  iconPos: {
+    type: String,
+    validator: function (v) {
+      return listIconPos.includes(v);
+    },
+  },
 });
+
+const emits = defineEmits(["onClick"]);
+
+function getClick(event) {
+  emits("onClick", event);
+}
 </script>
 
 <style lang="scss" scoped>
 .btn {
-  background-color: $bc;
-  color: $c;
-  text-transform: uppercase;
-  letter-spacing: 0.05rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-
-  padding: 0.5rem 1rem;
-
-  font-family: $ff--apple;
+  @include btn($grey);
 
   &--primary {
+    @include btn($white, $primary);
   }
   &--secondary {
+    @include btn($white, $secondary);
+
+    &-destructive {
+      @include btn($white, $secondary-destructive);
+    }
   }
   &--accent {
+    @include btn($white, $accent);
   }
-  &--ghost {
+  &--flat {
+    @include btn($white);
   }
-  &--link {
+  &--outline {
+    @include btn($white);
+
+    border: 1px solid $white;
   }
 }
 </style>

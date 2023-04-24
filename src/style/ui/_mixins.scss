@@ -1,0 +1,17 @@
+@mixin btn($c, $bg-c: transparent) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background-color: $bg-c;
+  color: $c;
+
+  font: $text-m;
+  font-weight: bold;
+
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+}

@@ -19,6 +19,7 @@ export default defineConfig({
           @import "./src/style/ui/reset";
           @import "./src/style/ui/variables";
           @import "./src/style/ui/fonts";
+          @import "./src/style/ui/mixins";
         `,
       },
     },
