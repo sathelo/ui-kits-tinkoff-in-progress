@@ -20,6 +20,9 @@ export default defineConfig({
           @import "./src/style/ui/variables";
           @import "./src/style/ui/fonts";
           @import "./src/style/ui/mixins";
+          @import "./src/style/ui/buttons";
+          @import "./src/style/ui/icons";
+          @import "./src/style/ui/size";
         `,
       },
     },
