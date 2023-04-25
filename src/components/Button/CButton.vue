@@ -1,22 +1,31 @@
 <template>
-  <button v-if="icon" @click="getClick" :class="className">
-    <VIcon v-if="iconPos === 'Left'" name="" />
-    <p>{{ text }}</p>
-    <VIcon v-if="iconPos === 'Right'" name="" />
+  <button
+    v-if="icon"
+    :disabled="disabled"
+    @click="getClick"
+    :class="getClassName"
+  >
+    <VIcon v-if="iconPos === 'left'" :name="icon" :class="getClassName" />
+    {{ text }}
+    <VIcon v-if="iconPos === 'right'" :name="icon" :class="getClassName" />
   </button>
-  <button v-else @click="getClick" :class="className">{{ text }}</button>
+  <button v-else :disabled="disabled" @click="getClick" :class="getClassName">
+    {{ text }}
+  </button>
 </template>
 
 <script setup>
-import { listBtn, listIconPos } from "@/data/listsClasses";
+import { computed } from "vue";
+import { listBtn, listIconPos, listSize } from "@/data/listsClasses";
+import * as listIcon from "@heroicons/vue/24/solid";
 import VIcon from "@/components/VIcon";
 
-defineProps({
+const props = defineProps({
   className: {
     type: String,
     default: listBtn[0],
     validator: function (v) {
-      return listBtn.includes(v);
+      return listBtn.includes(v.toLowerCase());
     },
   },
   text: {
@@ -26,48 +35,43 @@ defineProps({
   icon: {
     type: String,
     validator: function (v) {
-      return listIcon.includes(v);
+      return Object.keys(listIcon).includes(v);
     },
   },
   iconPos: {
     type: String,
+    default: "right",
     validator: function (v) {
-      return listIconPos.includes(v);
+      return listIconPos.includes(v.toLowerCase());
     },
+  },
+  size: {
+    type: String,
+    default: "l",
+    validator: function (v) {
+      return listSize.includes(v.toLowerCase());
+    },
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 
 const emits = defineEmits(["onClick"]);
+
+const getClassName = computed(() => {
+  let className = `${props.className.toLowerCase()} ${props.size.toLowerCase()}`;
+
+  if (props.icon) className += " " + "icon";
+  if (props.disabled) className += " " + "disabled";
+
+  return className;
+});
 
 function getClick(event) {
   emits("onClick", event);
 }
 </script>
 
-<style lang="scss" scoped>
-.btn {
-  @include btn($grey);
-
-  &--primary {
-    @include btn($white, $primary);
-  }
-  &--secondary {
-    @include btn($white, $secondary);
-
-    &-destructive {
-      @include btn($white, $secondary-destructive);
-    }
-  }
-  &--accent {
-    @include btn($white, $accent);
-  }
-  &--flat {
-    @include btn($white);
-  }
-  &--outline {
-    @include btn($white);
-
-    border: 1px solid $white;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

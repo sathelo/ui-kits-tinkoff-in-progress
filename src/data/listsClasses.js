@@ -9,3 +9,5 @@ export const listBtn = [
 ];
 
 export const listIconPos = ["left", "right"];
+
+export const listSize = ["L", "M", "S", "XS"];

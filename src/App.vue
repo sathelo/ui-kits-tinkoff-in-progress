@@ -31,10 +31,10 @@
     <div class="block__content">
       <Button
         @onClick="clickHandler"
-        className="btn--primary"
+        className="btn--secondary-destructive"
         text="Where could I find such an arrow...?"
         icon="LinkIcon"
-        iconPos="left"
+        iconPos="right"
       />
     </div>
   </div>

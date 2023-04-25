@@ -1,0 +1,99 @@
+.btn {
+  @include btn($grey);
+
+  & > .icon {
+    margin-left: 8px;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+
+    cursor: auto;
+  }
+
+  &--primary {
+    @include btn($white, $primary);
+
+    & > .icon {
+      margin-left: 8px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+
+      cursor: auto;
+    }
+  }
+
+  &--secondary {
+    @include btn($white, $secondary);
+
+    & > .icon {
+      margin-left: 8px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+
+      cursor: auto;
+    }
+
+    &-destructive {
+      @include btn($white, $secondary-destructive);
+
+      & > .icon {
+        margin-left: 8px;
+      }
+
+      &.disabled {
+        opacity: 0.5;
+
+        cursor: auto;
+      }
+    }
+  }
+
+  &--accent {
+    @include btn($white, $accent);
+
+    & > .icon {
+      margin-left: 8px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+
+      cursor: auto;
+    }
+  }
+
+  &--flat {
+    @include btn($white);
+
+    & > .icon {
+      margin-left: 8px;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+
+      cursor: auto;
+    }
+  }
+
+  &--outline {
+    @include btn($white);
+
+    border: 1px solid $white;
+
+    & > .icon {
+      margin-left: 8px;
+    }
+
+    & > .disabled {
+      opacity: 0.5;
+
+      cursor: auto;
+    }
+  }
+}
